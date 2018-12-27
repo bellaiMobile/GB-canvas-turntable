@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>GB Canvas Turntable</title>
+  <link rel="stylesheet" href="css/typo/typo.css">
+  <link rel="stylesheet" href="css/GB-canvas-turntable.css">
+  <style>
+    .wrapper {
+      padding: 20px 40px;
+    }
+
+    .fork-github {
+      position: fixed;
+      right: -100px;
+      top: 45px;
+      z-index: 9999;
+      padding: 2px 100px;
+      font-size: 12px;
+      background-color: #444;
+      border: 1px solid #000;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      text-align: center;
+    }
+
+    .fork-github a {
+      color: #fff;
+    }
+
+    .gb-turntable a.gb-turntable-btn {
+      border: none;
+    }
+
+    body{
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body ontouchstart>
+  <div id="logger" style="position: absolute; top: 0px; right: 30px; width:300px; height: 100%; overflow-y: auto; color: black; text-align: end;"></div>
+  <script src="js/Lottery.js"></script>
+  <script>
+    var logger = document.getElementById('logger');
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var tmpDom = null;
+      var tmpColor = null;
+
+      var lottery1 = new Lottery([1, 2, 3 ], function(i) {
+        tmpDom = document.createElement('h1');
+        tmpColor = tmpColor || Lottery.randomColor();
+        tmpDom.style.color = tmpColor;
+        tmpDom.style.fontSize = '3rem';
+        tmpDom.textContent = i + 1;
+        logger.appendChild(tmpDom);
+
+        console.log('i', i + 1);
+        if (i == 0) { // 1
+          lottery2._models = [
+            1,2,3,4,5,6,7,8,9,10
+          ];
+          lottery2.render();
+          lottery2.mockRun();
+        } else if (i == 1) {// 2
+          lottery2._models = [
+            1,2,3,4,5,6,7,8,9,10,
+            11,12,13,14,15,16,17,18,19,20
+          ];
+          lottery2.render();
+          lottery2.mockRun();
+        } else { // 3 i == 2
+          lottery2._models = [
+            1,2,3,4,5,
+          ];
+          lottery2.render();
+          lottery2.mockRun();
+        }
+      });
+
+      var lottery2 = new Lottery([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        function(j) {
+          done(j);
+        }, { enableRunButton: false });
+
+      function done(j) {
+        console.log('done: ', j + 1);
+        tmpDom = document.createElement('h3');
+        tmpColor = tmpColor || Lottery.randomColor();
+        tmpDom.style.color = tmpColor;
+        tmpDom.style.fonSize = '2rem';
+        tmpDom.textContent = j + 1;
+        logger.appendChild(tmpDom);
+
+        tmpDom = null;
+        tmpColor = null;
+      };
+
+
+      lottery1.inject(document.body);
+      lottery2.inject(document.body);
+    }, false);
+  </script>
+</body>
+
+</html>
