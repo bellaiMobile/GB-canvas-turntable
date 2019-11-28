@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>GB Canvas Turntable</title>
-  <link rel="stylesheet" href="./src/css/typo/typo.css">
-  <link rel="stylesheet" href="./src/css/GB-canvas-turntable.css">
+  <link rel="stylesheet" href="css/typo/typo.css">
+  <link rel="stylesheet" href="css/GB-canvas-turntable.css">
   <style>
     .wrapper {
       padding: 20px 40px;
@@ -37,30 +37,28 @@
       border: none;
     }
 
-    body {
+    body{
       overflow: hidden;
     }
   </style>
 </head>
 
 <body ontouchstart>
-  <div id="logger"
-    style="position: absolute; top: 0px; right: 30px; width:300px; height: 100%; overflow-y: auto; color: black; text-align: end;">
-  </div>
-  <script src="./src/js/Lottery.js"></script>
+  <div id="logger" style="position: absolute; top: 0px; right: 30px; width:300px; height: 100%; overflow-y: auto; color: black; text-align: end;"></div>
+  <script src="js/Lottery.js"></script>
   <script>
     var logger = document.getElementById('logger');
 
     function autoScrollBottom(element) {
       if (!element) return;
-      element.scrollTop = Math.max(element.scrollHeight - element.offsetHeight);
+      element.scrollTop =  Math.max(element.scrollHeight - element.offsetHeight);
     }
 
     document.addEventListener('DOMContentLoaded', function () {
       var tmpDom = null;
       var tmpColor = null;
 
-      var lottery1 = new Lottery([1, 2, 3], function (i) {
+      var lottery1 = new Lottery([1, 2, 3 ], function(i) {
         tmpDom = document.createElement('h1');
         tmpColor = tmpColor || Lottery.randomColor();
         tmpDom.style.color = tmpColor;
@@ -72,20 +70,20 @@
         console.log('i', i + 1);
         if (i == 0) { // 1
           lottery2._models = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            1,2,3,4,5,6,7,8,9,10
           ];
           lottery2.render();
           lottery2.mockRun();
         } else if (i == 1) {// 2
           lottery2._models = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-            11, 12, 13, 14, 15, 16, 17, 18, 19, 20
+            1,2,3,4,5,6,7,8,9,10,
+            11,12,13,14,15,16,17,18,19,20
           ];
           lottery2.render();
           lottery2.mockRun();
         } else { // 3 i == 2
           lottery2._models = [
-            1, 2, 3, 4, 5,
+            1,2,3,4,5,
           ];
           lottery2.render();
           lottery2.mockRun();
@@ -93,7 +91,7 @@
       });
 
       var lottery2 = new Lottery([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-        function (j) {
+        function(j) {
           done(j);
         }, { enableRunButton: false });
 
